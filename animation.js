@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var mouse = false;
+    var mouse2 = false;
     var recent = 0;
     $(".center-mid")
     .on('mousedown', function(e){
@@ -11,7 +12,6 @@ $(document).ready(function(){
     })
     .on('mouseover', function(e){
         if(mouse){
-            console.log(mouse);
             var that = parseInt($(this).parent('.grid').attr("data-index"));
             if(that == recent + 1){
                 $(".output").append($('.grid[data-index="'+recent+'"]').find(".center-right").text());
@@ -42,6 +42,27 @@ $(document).ready(function(){
     });
     $("body").on('mouseup', function(){
         mouse = false;
-        console.log("test");
+    });
+    $(".leftbar #del").on('click', function(){
+        $(".output").html($(".output").html().slice(0,-1));
+    });
+    $("div#com")
+    .on('mousedown', function(){
+        mouse2 = true;
+    })
+    .on('mouseup', function(){
+        mouse2 = false;
+    })
+    .on('click', function(){
+        $(".output").append(",");
+    })
+    .on('mouseover', function(){
+        console.log(mouse2);  
+    });
+    $("#sym div").not('#com').each(function(){
+        console.log($(this));
+        $(this).on('click',function(){
+            console.log("test");
+        });
     });
 });
